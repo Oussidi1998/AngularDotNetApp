@@ -1,0 +1,67 @@
+<h1 class="text-center m-4">Hi {{currentUser.username}}!</h1>
+
+<div *ngIf="isAdmin" class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-7">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title">
+            <p><b>Note: </b> You get user's back when you delete someone because of static users list in backend </p>
+          </div>
+          <div class="alert" [ngClass]="{'alert-success':messageClass === 'success','alert-danger':messageClass === 'danger'}" >{{message}}</div>
+          <table class="table table-striped">
+            <tr>
+              <th>UserID</th>
+              <th>Username</th>
+              <th>Role</th>
+              <th>Delete</th>
+            </tr>
+            <tr *ngFor="let user of listUsers">
+              <td>{{user.id}}</td>
+              <td>{{user.username}}</td>
+              <td>{{user.role}}</td>
+              <td> <button type="button" class="btn btn-danger" (click)="openModal(deleteUserModal, user)">Delete</button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="!isAdmin" class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <p>Username :  <b>{{currentUser.username}}</b></p>
+          <p>Role :  <b>{{currentUser.role}}</b></p>
+          <p>Your ID :  <b>{{currentUser.id}}</b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<ng-template #deleteUserModal let-modal class="modal">
+  <div class="modal-header">
+    <h5 class="modal-title" id="editProfileLabel">delete User</h5>
+    <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="deleteUserForm" (ngSubmit)="onSubmitDeleteUser()">
+      <p>Do you really want to delete this user</p>
+      <input type="hidden" class="form-control" formControlName="id" id="id">
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+        <button type="submit" class="btn btn-primary">Yes Continue</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
