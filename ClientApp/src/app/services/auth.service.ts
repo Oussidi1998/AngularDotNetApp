@@ -23,6 +23,7 @@ export class AuthService {
     return this.http.post<any>(`api/users`, { username, password })
       .pipe(map(data => {
         localStorage.setItem('currentUser', data.token);
+        this.userToken = data.token;
         return data.token ;
       }))
   }
@@ -57,5 +58,7 @@ export class AuthService {
   logout() {
     // remove user from local storage and set current user to null
     localStorage.removeItem('currentUser');
+      this.userToken="";
+     this.listUsers=[];
   }
 }

@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     private AuthService: AuthService,
   ) {
     // redirect to home if already logged in
-    if (this.AuthService.getUserToken() !== null) {
+    if (this.AuthService.getUserToken() != "" && this.AuthService.getUserToken() != null) {
       this.router.navigate(['/']);
     }
   }
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.AuthService.login(this.f.username.value, this.f.password.value)
       .subscribe(
-        token => {
+        next => {
           this.messageError = null;
           this.router.navigateByUrl('/');
           this.loading = false;

@@ -28,6 +28,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+      { path: 'home', component: HomeComponent,  canActivate: [AuthGuard] },
       { path: 'login', component: LoginComponent },
     ])
   ],
