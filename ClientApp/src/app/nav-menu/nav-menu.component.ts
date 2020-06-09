@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-nav-menu',
@@ -14,7 +13,7 @@ export class NavMenuComponent {
   currentUser: User;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private AuthService: AuthService
   ) {
     if (AuthService.getUserToken() !== null) {
